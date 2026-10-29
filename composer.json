@@ -1,0 +1,56 @@
+{
+  "name": "ez-php/encryption",
+  "version": "2.6.3",
+  "description": "Symmetric authenticated encryption (ext-sodium XChaCha20-Poly1305) with key rotation, encrypted cookies and an ORM cast",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Andreas Uretschnig",
+      "email": "andreas.uretschnig@gmail.com"
+    }
+  ],
+  "keywords": ["encryption", "sodium", "cookies", "php", "ez-php"],
+  "homepage": "https://github.com/ez-php/encryption",
+  "support": {
+    "issues": "https://github.com/ez-php/encryption/issues",
+    "source": "https://github.com/ez-php/encryption"
+  },
+  "require": {
+    "php": "^8.5",
+    "ext-sodium": "*",
+    "ez-php/contracts": "^2.6.0",
+    "ez-php/http": "^2.6.4"
+  },
+  "suggest": {
+    "ez-php/console": "Needed for the encryption:key command",
+    "ez-php/orm": "Needed for the Orm\\EncryptedString cast"
+  },
+  "require-dev": {
+    "ez-php/docker": "^2.6.3",
+    "ez-php/testing-application": "^2.6.0",
+    "ez-php/console": "^2.6.0",
+    "ez-php/orm": "^2.6.0",
+    "phpunit/phpunit": "^13.0",
+    "phpstan/phpstan": "^2.1",
+    "friendsofphp/php-cs-fixer": "^3.94",
+    "phpstan/phpstan-strict-rules": "^2.0",
+    "phpstan/phpstan-deprecation-rules": "^2.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "EzPhp\\Encryption\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "scripts": {
+    "cs": "php-cs-fixer fix",
+    "analyse": "phpstan analyse",
+    "test": "phpunit",
+    "full": "composer analyse && composer cs && composer test"
+  }
+}

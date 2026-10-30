@@ -1,6 +1,6 @@
 {
   "name": "ez-php/encryption",
-  "version": "2.6.3",
+  "version": "2.6.4",
   "description": "Symmetric authenticated encryption (ext-sodium XChaCha20-Poly1305) with key rotation, encrypted cookies and an ORM cast",
   "type": "library",
   "license": "MIT",

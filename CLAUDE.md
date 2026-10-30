@@ -151,7 +151,7 @@ php make_module.php <name> --description="..." --services=mysql,redis --extensio
 
 `<name>` is the kebab-case package name; the namespace is derived as
 `EzPhp\<PascalCase>` (each `-`-separated word upper-cased) unless `--namespace=`
-overrides it. Existing exceptions the guess gets wrong: `asyncapi` → `AsyncApi`,
+overrides it. Existing exceptions the guess gets wrong: `asyncapi` → `AsyncApi`, `asyncapi-ui` → `AsyncApiUi`,
 `bignum` → `BigNum`, `dataloader` → `DataLoader`, `dotenv` → `Env`, `graphql` → `GraphQL`, `graphql-subscriptions` → `GraphQLSubscriptions`, `oauth` → `OAuth`,
 `opcache` → `OPCache`, `openapi` → `OpenApi`, `qrcode` → `QrCode`, `swagger-ui` → `SwaggerUI`, `webauthn` → `WebAuthn` and
 `websocket` → `WebSocket`; `websocket-client` → `WebsocketClient`, `websocket-tls` → `WebsocketTls`,
@@ -352,4 +352,4 @@ tests/
 | Asymmetric crypto, signatures, JWT | `ez-php/auth` (JWT), `ez-php/webhook` (HMAC), `ez-php/push` (Web Push encryption) |
 | KMS / HSM / envelope encryption with remote key stores | Application layer or a future module |
 | Writing keys into `.env`, automated re-encryption of stored data | Application / deployment |
-| Session storage | `ez-php/session` (put `EncryptedCookieMiddleware` in front if the session cookie should be encrypted) |
+| Session storage, and the native session cookie | `ez-php/session` — PHP's session cookie is sent by `session_start()` via `header()` and read from `$_COOKIE`, never through `Response::withCookies()`/`Request::cookies()`, so `EncryptedCookieMiddleware` does not see it (it holds only an opaque id anyway) |

@@ -73,7 +73,10 @@ Inject `Encrypter` where you can; the façade exists for static call sites.
 $app->middleware(EzPhp\Encryption\Middleware\EncryptedCookieMiddleware::class);
 ```
 
-Register it early in the global stack (before anything that reads cookies, e.g. sessions).
+Register it early in the global stack, before middleware that reads cookies through the
+`Request` (e.g. `MaintenanceModeMiddleware`'s bypass cookie). It only sees cookies set on the
+`Response` and read from the `Request`: PHP's native session cookie (`session_start()`,
+`$_COOKIE`) never passes through it and stays an opaque, unencrypted id.
 Handlers read and queue plaintext (`$request->cookie()`, `$response->withCookie()`); the
 browser only sees ciphertext. A cookie that does not decrypt — tampered, copied from another
 cookie name, or made with a retired key — is dropped. Cookies listed in
